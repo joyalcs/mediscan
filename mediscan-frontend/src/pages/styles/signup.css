@@ -1,0 +1,13 @@
+.signup {
+    display: flex; /* This is already set */
+    justify-content: space-between; /* This aligns the left and right divs to opposite ends of the container */
+    height: 100vh;
+    width: 100%; /* Optional: Makes the container fill the height of the viewport */
+}
+
+.left, .right {
+    width: 50%; /* Make sure each child occupies half of the parent container */
+}
+.left{
+    background-color: blue;
+}

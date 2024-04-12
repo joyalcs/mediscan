@@ -1,0 +1,102 @@
+.medi-search{
+    position: absolute;
+    width: 976px;
+    height: 180px;
+    left: calc(50% - 976px/2);
+    top: 1140px;
+
+    background: #14A39A;
+    border-radius: 12px;
+
+}
+
+.medi-search h2{
+    position: absolute;
+    height: 65px;
+    left: 106px;
+    width: 562px;
+    top: 21px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ffff;
+}
+/* CSS for the MedicineSearch component */
+.medi-search {
+    /* padding: 20px; */
+
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    width: 800px;
+    height: 40px;
+    left: calc(50% - 976px/2 - 11px);
+    top: 512px;
+    background: #14A39A;
+    border-radius: 12px;
+}
+
+.select-dropdown{
+    width: 200px; /* Adjust the width as needed */
+}
+.search-input{
+    width: 600px;
+}
+.search-bar{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    background-color: #ffff;
+}
+
+
+.search-bar TextField{
+    width: 100px;
+}
+.search-button{
+    background-color: #ffff;
+}
+.doctor{
+    position: absolute;
+    left: 180px;
+}
+.heading{
+    width: 750px;
+    position: absolute;
+    right: 0;
+}
+.heading h2{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 70px;
+}
+.second{
+    color: #14A39A;
+}
+.heading p{
+    position: absolute;
+    width: 587px;
+    height: 40px;
+    top: 200px;
+    left: 10px;
+    
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    
+    color: #111111;  
+}
+

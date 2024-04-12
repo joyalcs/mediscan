@@ -1,0 +1,161 @@
+.cards{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 170px;
+
+    
+}
+.cards-align{
+    position: absolute;
+    width: 306px;
+    height: 256px;
+    left: 300px;
+    top: 1400px;
+}
+.card{
+        min-width: 220px;
+    border-radius: 24px;
+}
+.ourteams-cards{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 50px;
+}
+/* Frame */
+
+/* Auto layout */
+/* display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 24px;
+gap: 16px;
+
+position: absolute;
+width: 306px;
+height: 256px;
+left: 567px;
+top: 4px;
+
+/* White */
+/* background: #FFFFFF; */
+/* Paragraph */
+/* border: 1px solid #666666; */
+/* border-radius: 24px; */ 
+
+
+/* icon */
+
+/* width: 80px; */
+/* height: 80px; */
+
+/* Accent 1 */
+/* background: #0155A5; */
+/* border-radius: 100px; */
+
+/* Inside auto layout */
+/* flex: none;
+order: 0;
+flex-grow: 0; */
+
+
+/* delivery box */
+
+/* position: absolute;
+width: 48px;
+height: 48px;
+left: calc(50% - 48px/2);
+top: calc(50% - 48px/2); */
+
+
+
+/* Vector */
+
+/* box-sizing: border-box;
+
+position: absolute;
+left: 33.33%;
+right: 6.25%;
+top: 6.25%;
+bottom: 6.25%; */
+
+/* White */
+/* border: 1.5px solid #FFFFFF; */
+
+
+/* Vector */
+
+/* box-sizing: border-box; */
+/* 
+position: absolute;
+left: 6.25%;
+right: 14.58%;
+top: 6.25%;
+bottom: 10.42%; */
+
+/* White */
+/* border: 1.5px solid #FFFFFF; */
+
+
+/* tx */
+
+/* Auto layout */
+/* display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+width: 258px;
+height: 112px; */
+
+
+/* Inside auto layout */
+/* flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0; */
+
+
+/* Know Your Medicine */
+
+/* width: 255px;
+height: 32px; */
+
+/* Headings/H5 600 */
+/* font-family: 'Outfit';
+font-style: normal;
+font-weight: 600;
+font-size: 28px;
+line-height: 32px; */
+/* identical to box height, or 114% */
+
+/* heading */
+/* color: #1C2F41; */
+
+
+/* Inside auto layout */
+/* flex: none;
+order: 0;
+flex-grow: 0; */
+
+
+/* Know about the side effects of your medicine */
+/* 
+width: 258px;
+height: 64px;    */
+
+/* Main Text/P1 400 */
+/* font-family: 'Asap';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 32px; */
+/* or 200% */
+
+/* Paragraph */
+/* color: #666666; */

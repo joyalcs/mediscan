@@ -1,0 +1,18 @@
+.head{
+    position: absolute;
+    top: 1680px;
+    left: 270px;
+}
+.head h2{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 70px;
+}
+
+.list-class{
+    position: absolute;
+    top: 1900px;
+    left: 250px;
+}

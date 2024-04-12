@@ -1,0 +1,39 @@
+.first-part{
+    color: #0155A5; 
+}
+.second-part{
+    color: black;
+}
+h1{
+    position: absolute;
+    top: 250px;
+    font-size: 120px;
+    right: 100px;
+}
+
+.mediscan-sentence h2{
+    position: absolute;
+    top: 450px;
+    right: 105px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+}
+
+.mediscan-para p{
+    max-width: 450px;
+    font-size: 25px;
+    position: absolute;
+    top: 530px;
+    right: 85px;
+}
+
+/* Your all-in-one solution for finding your medication , doctor bookings, and comprehensive medicine information via chatbots. */
+
+
+
+
+/* Your local medical assistant */
+
