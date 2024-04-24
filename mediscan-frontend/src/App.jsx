@@ -24,7 +24,7 @@ function App() {
             <Route  path='/doctors' element={<Doctors/>}/>
             <Route path='/doctor' element={<DoctorsSinglePage/>}/>
             <Route path='/add-medicine' element={<AddMedicinePage/>} />
-            <Route path='/medicines' element={<MedicinesPage/>}/>
+            <Route path='/pharmacies' element={<MedicinesPage/>}/>
           </Routes>
       </Container>
     </>

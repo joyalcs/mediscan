@@ -1,50 +1,76 @@
-import * as React from 'react';
+import React , { useState }from 'react';
+import { Card, CardContent, Typography, Button, Grid, Container } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import NavbarComponent from '../components/Navbar'
+import MedicineSearch from '../components/MedicineSearch';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import Doctor from '../assets/images/Doctors.png'
+import './styles/medicines.css'
 
-const MedicinesPage = () => {
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#007bff', // Material Blue
+    },
+    secondary: {
+      main: '#6c757d', // Material Gray
+    },
+  },
+});
+
+const MedicinesPage = (props) => {
+  const [pincode, setPincode] = useState('');
+  const [searchTxt, setSearchTxt] = useState('');
+
+  const handleChange = (event) => {
+      setPincode(event.target.value);
+  };
     const theme = useTheme();
-  return (
-    <div>
-         <Card sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            Live From Space
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            Mac Miller
-          </Typography>
-        </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-          </IconButton>
-          <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-          </IconButton>
-        </Box>
-      </Box>
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image="/static/images/cards/live-from-space.jpg"
-        alt="Live from space album cover"
-      />
-    </Card>
-    </div>
-  )
-}
+    return (
+      <>
+      <div><NavbarComponent/></div>
+            <ThemeProvider theme={theme}>
+      <Container maxWidth="lg">
+        <Grid container spacing={2} alignItems="center" style={{ margin: '20px 0', background: '#f5f5f5', borderRadius: '8px', padding: '16px' }}>
+          <Grid item xs={12} sm={2}>
+            {/* Assuming that 'image.png' is in the 'public' directory */}
+            <img src="image.png" alt="Storefront" style={{ width: '100%', borderRadius: '8px' }} />
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Typography variant="body1" color="secondary">
+              680699
+            </Typography>
+            <Typography variant="h6" color="primary">
+              Neethi Medical Store No.594
+            </Typography>
+            {/* <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
+              <StarBorderIcon color="secondary" />
+              4.5 (584 reviews)
+            </Typography> */}
+            <Typography variant="body1" color="secondary">
+              Town Hall Rd, Irinjalakuda, Thrissur, Irinjalakuda, Kerala 680121
+            </Typography>
+            <Typography variant="body1" color="secondary">
+              📞   0480 2828378
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={2} style={{ textAlign: 'center'}}>
+            <Button variant="contained" color="primary" style={{borderRadius: 10, height:50, width:170, marginRight:100}}>
+              Get Directions
+            </Button>
+          </Grid>
+        </Grid>
+      </Container>
+    </ThemeProvider>
+    </>
+    );
+};
 
-export default MedicinesPage
+export default MedicinesPage;

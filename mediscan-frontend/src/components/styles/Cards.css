@@ -4,6 +4,7 @@
     align-items: flex-start;
     padding: 24px;
     gap: 170px;
+    margin-top: 30px;
 
     
 }
@@ -11,7 +12,7 @@
     position: absolute;
     width: 306px;
     height: 256px;
-    left: 300px;
+    left: 240px;
     top: 1400px;
 }
 .card{

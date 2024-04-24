@@ -1,3 +1,7 @@
+body{
+    font-family: outfit;
+    font-size: bold;
+}
 .main {
     display: flex; /* This is already set */
     justify-content: space-between; /* This aligns the left and right divs to opposite ends of the container */
@@ -20,7 +24,7 @@
 }
 
 .contact-us{
-    display: flex; /* This is already set */
+    display: flex; 
     justify-content: space-between; /* This aligns the left and right divs to opposite ends of the container */
     width: 100%;
     position: absolute;

@@ -27,7 +27,6 @@ const MedicineSearch = () => {
                 </h2>
                 <p>At mediscan, we take care of finding out the right medicine for you and your family</p>
             </div>
-        </div>
         <div className="medi-search">
             <h2>Search for Medicines / Healthcare Products</h2>
             <div className="search-bar">
@@ -63,6 +62,7 @@ const MedicineSearch = () => {
                     <SearchOutlinedIcon/>
                 </Button>
             </div>
+        </div>
         </div>
         </>
     );
