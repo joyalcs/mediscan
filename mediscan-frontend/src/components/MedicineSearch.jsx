@@ -1,25 +1,39 @@
 import React, { useState } from 'react';
 import './styles/MedicineSearch.css';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import Doctor from '../assets/images/Doctors.png'
-const MedicineSearch = () => {
-    const [pincode, setPincode] = useState('');
-    const [searchTxt, setSearchTxt] = useState('');
+import Doctor from '../assets/images/Doctors.png';
+import { setSearchDetails } from '../features/user/searchSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-    const handleChange = (event) => {
+const MedicineSearch = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [pincode, setPincode] = useState('');
+    const [medicine, setMedicine] = useState('');
+    const handlePincodeChange = (event) => {
         setPincode(event.target.value);
     };
 
+    const handleMedicineChange = (event) => {
+        setMedicine(event.target.value);
+    };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        // Dispatch Redux action to store search details
+        dispatch(setSearchDetails({ pincode, medicine }));
+        navigate('/pharmacies')
+        
+    };
+
     return (
-        <>
         <div className='main'>
-            <img src={Doctor} className='doctor' width={400} height={350}/>
+            <img src={Doctor} className='doctor' width={400} height={350} alt="Doctor" />
             <div className="heading">
                 <h2>
                     <span className='first'>Feel better about finding</span>  <br/>
@@ -27,44 +41,40 @@ const MedicineSearch = () => {
                 </h2>
                 <p>At mediscan, we take care of finding out the right medicine for you and your family</p>
             </div>
-        <div className="medi-search">
-            <h2>Search for Medicines / Healthcare Products</h2>
-            <div className="search-bar">
-                {/* Dropdown */}
-                <FormControl size="small" className="select-dropdown">
-                    <InputLabel id="pincode-label">Pincode</InputLabel>
-                    <Select
-                        labelId="pincode-label"
-                        id="pincode-select"
+            <Link to="/pharmacies">
+            <div className="medi-search">
+                <h2>Search for Medicines / Healthcare Products</h2>
+                <div className="search-bar">
+                    <TextField
+                        type="text"
+                        placeholder="Pincode"
                         value={pincode}
-                        label="Pincode"
-                        onChange={handleChange}
+                        onChange={handlePincodeChange}
+                        className="search-input"
+                        size="small"
+                        name="pincode"
+                    />
+                    <TextField
+                        type="text"
+                        placeholder="Medicine"
+                        value={medicine}
+                        onChange={handleMedicineChange}
+                        className="search-input"
+                        size="small"
+                        name="medicine"
+                    />
+                    <Button
+                        variant="contained"
+                        onClick={handleSearch}
+                        className="search-button"
                     >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
+                        <SearchOutlinedIcon />
+                    </Button>
+                </div>
 
-                <TextField
-                    type="search"
-                    placeholder="Search"
-                    value={searchTxt}
-                    onChange={e => setSearchTxt(e.target.value)}
-                    className="search-input"
-                    size="small"
-                />
-
-                <Button variant="" className="search-button">
-                    <SearchOutlinedIcon/>
-                </Button>
             </div>
+            </Link>
         </div>
-        </div>
-        </>
     );
 };
 

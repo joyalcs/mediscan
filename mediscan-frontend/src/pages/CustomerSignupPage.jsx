@@ -16,40 +16,40 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "./styles/signup.css";
 import Left_side_sign from '../components/Left_side_sign'
+import { useRegisterUserMutation } from '../services/user/userAuthApi';
+
 
 
 const CustomerSignupPage = () => {
   const theme = createTheme();
   const [serverMsg, setServerMsg] = useState({})
   const navigate = useNavigate();
-//   const [registerUser, { isLoading } ] = useRegisterUserMutation();
-
-
+  const [registerUser, mutationState] = useRegisterUserMutation();
+  const { isLoading, isError, error, data } = mutationState;
+  
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // const data = new FormData(e.currentTarget);
-    // const actualData ={
-    //   username: data.get('username'),
-    //   email: data.get('email'),
-    //   first_name: data.get('firstName'),
-    //   last_name: data.get('lastName'),
-    //   password: data.get('password'),
-    //   password2: data.get('password2')
+     e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const actualData ={
+      username: data.get('username'),
+      email: data.get('email'),
+      phone: data.get('phone'),
+      password: data.get('password'),
+      password2: data.get('password2')
 
-    // }
-    // const res = await registerUser(actualData)
-    // if(res.error){
-    //   setServerMsg(res.error)
+    }
+    const res = await registerUser(actualData)
+    if(res.error){
+      setServerMsg(res.error)
 
-    // }
-    // if(res.data){
-    //   setServerMsg(res.data)
-    //   navigate("/signin")
-    // }
+    }
+    if(res.data){
+      setServerMsg(res.data)
+      navigate("/signin")
+    }
 
 
     document.querySelector('form').reset();
-    console.log(message);
   }
   return (
     
@@ -74,7 +74,7 @@ const CustomerSignupPage = () => {
           <Avatar>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography variant="h5">Register Your Pharmacy</Typography>
+          <Typography variant="h5">Customer Signup</Typography>
           <Alert severity="info">
           <AlertTitle>Info</AlertTitle>
               Use any of the special characters on the password. Password eg: Password@123
@@ -151,7 +151,7 @@ const CustomerSignupPage = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link className='bg-white text-dark ms-3 text-decoration-none'  to="" >
+                <Link className='bg-white text-dark ms-3 text-decoration-none'  to="\login" >
                   Already have an account? Sign in
                 </Link>
               </Grid>

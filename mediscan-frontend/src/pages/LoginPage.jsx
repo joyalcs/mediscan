@@ -1,134 +1,120 @@
 import React, { useState } from 'react';
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  Grid,
-  Typography,
-  Container,
-  Alert,
-  AlertTitle
-} from '@mui/material';
+import { Avatar, Button, CssBaseline, TextField, Grid, Typography, Container, Alert, AlertTitle } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { setUserToken } from '../features/user/authSlice';
+import { getToken, storeToken } from '../services/localStorage';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "./styles/signup.css";
-import Left_side_sign from '../components/Left_side_sign'
+import Left_side_sign from '../components/Left_side_sign';
+import { useLoginUserMutation } from '../services/user/userAuthApi';
 
-
-const RegisterPage = () => {
-  const theme = createTheme();
-  const [serverMsg, setServerMsg] = useState({})
+const LoginPage = () => {
   const navigate = useNavigate();
-//   const [registerUser, { isLoading } ] = useRegisterUserMutation();
-
+  const dispatch = useDispatch();
+  const [serverMsg, setServerMsg] = useState('');
+  const [loginUser, { isLoading }] = useLoginUserMutation();
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // const data = new FormData(e.currentTarget);
-    // const actualData ={
-    //   username: data.get('username'),
-    //   email: data.get('email'),
-    //   first_name: data.get('firstName'),
-    //   last_name: data.get('lastName'),
-    //   password: data.get('password'),
-    //   password2: data.get('password2')
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const actualData = {
+      username: data.get('username'),
+      password: data.get('password'),
+    };
 
-    // }
-    // const res = await registerUser(actualData)
-    // if(res.error){
-    //   setServerMsg(res.error)
-
-    // }
-    // if(res.data){
-    //   setServerMsg(res.data)
-    //   navigate("/signin")
-    // }
-
+    try {
+      const res = await loginUser(actualData);
+      if (res.error) {
+        setServerMsg(res.error.data.message);
+      }
+      if (res.data) {
+        console.log(res.data.data.accesstoken);
+        const { accesstoken, refreshtoken, user_type, username } = res.data.data;
+        localStorage.setItem('accessToken', accesstoken);
+        localStorage.setItem('refreshToken', refreshtoken);
+        localStorage.setItem('user_type', user_type);
+        localStorage.setItem('username', username )
+        dispatch(setUserToken({ access_token: accesstoken }));
+        if (user_type === "pharmacy") {
+          navigate('/add-medicine');
+        } else {
+          navigate('/');
+        }
+      }
+    } catch (error) {
+      console.error('An error occurred during login:', error);
+    }
 
     document.querySelector('form').reset();
-    console.log(message);
-  }
+  };
+
   return (
-    
-    <div className="signup">
-      <div className="left">
-        <Left_side_sign/>
-      </div>
-      <div className="right">
-      <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginTop: '8px',
-          }}
-        >
-
-          <Avatar>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography variant="h5">Login Pharamcy/Customer</Typography>
-          
-
-          <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  type='email'
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-
-                />
-              </Grid>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: '8px',
+        }}
+      >
+        <Avatar>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography variant="h5">Login Pharmacy/Customer</Typography>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+              />
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              style={{ margin: '16px 0' }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link className='bg-white text-dark ms-3 text-decoration-none'  to="" >
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+              />
             </Grid>
-          </form>
-
-
-        </div>
-      </Container>
-    </ThemeProvider>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            style={{ margin: '16px 0' }}
+          >
+            Sign In
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link to="/customer-signup">Don't have an Customer account? Sign up</Link><br/>
+              <Link to="/pharmacy-signup">Don't have an Pharmacy account? Sign up</Link>
+            </Grid>
+          </Grid>
+        </form>
+        {serverMsg && (
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {serverMsg}
+          </Alert>
+        )}
       </div>
-    </div>
-    
+    </Container>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

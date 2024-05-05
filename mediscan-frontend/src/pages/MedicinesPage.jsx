@@ -1,18 +1,18 @@
-import React , { useState }from 'react';
-import { Card, CardContent, Typography, Button, Grid, Container } from '@mui/material';
+import React, { useState } from 'react';
+import { 
+  Card, 
+  CardContent, 
+  Typography, 
+  Button, 
+  Grid, 
+  Container, 
+  TextField 
+} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { useTheme } from '@mui/material/styles';
-import NavbarComponent from '../components/Navbar'
-import MedicineSearch from '../components/MedicineSearch';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import Doctor from '../assets/images/Doctors.png'
-import './styles/medicines.css'
+import NavbarComponent from '../components/Navbar';
+import { useGetSerachPharmacyQuery } from '../services/pharmacy/pharmacyApi';
+import './styles/medicinepage.css';
 
 const theme = createTheme({
   palette: {
@@ -25,52 +25,104 @@ const theme = createTheme({
   },
 });
 
-const MedicinesPage = (props) => {
+const MedicinesPage = () => {
   const [pincode, setPincode] = useState('');
-  const [searchTxt, setSearchTxt] = useState('');
+  const [medicine, setMedicine] = useState('');
+  const { data: pharmacies, isLoading, isSuccess, isError, error } = useGetSerachPharmacyQuery({ pincode, medicine });
 
-  const handleChange = (event) => {
-      setPincode(event.target.value);
+  const handlePincodeChange = (event) => {
+    setPincode(event.target.value);
   };
-    const theme = useTheme();
-    return (
-      <>
-      <div><NavbarComponent/></div>
-            <ThemeProvider theme={theme}>
-      <Container maxWidth="lg">
-        <Grid container spacing={2} alignItems="center" style={{ margin: '20px 0', background: '#f5f5f5', borderRadius: '8px', padding: '16px' }}>
-          <Grid item xs={12} sm={2}>
-            {/* Assuming that 'image.png' is in the 'public' directory */}
-            <img src="image.png" alt="Storefront" style={{ width: '100%', borderRadius: '8px' }} />
-          </Grid>
-          <Grid item xs={12} sm={8}>
-            <Typography variant="body1" color="secondary">
-              680699
-            </Typography>
-            <Typography variant="h6" color="primary">
-              Neethi Medical Store No.594
-            </Typography>
-            {/* <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
-              <StarBorderIcon color="secondary" />
-              4.5 (584 reviews)
-            </Typography> */}
-            <Typography variant="body1" color="secondary">
-              Town Hall Rd, Irinjalakuda, Thrissur, Irinjalakuda, Kerala 680121
-            </Typography>
-            <Typography variant="body1" color="secondary">
-              📞   0480 2828378
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={2} style={{ textAlign: 'center'}}>
-            <Button variant="contained" color="primary" style={{borderRadius: 10, height:50, width:170, marginRight:100}}>
-              Get Directions
-            </Button>
-          </Grid>
+
+  const handleMedicineChange = (event) => {
+    setMedicine(event.target.value);
+  };
+
+  const renderPharmaciesData = () => {
+    if (isLoading) {
+      return <p>Loading...</p>;
+    } else if (isSuccess) {
+      if (!pharmacies) {
+        return <p>No pharmacies found.</p>;
+      }
+  
+      return (
+        <Grid container spacing={2} style={{ marginTop: 20 }}>
+          {pharmacies.map((pharmacy) => (
+            <Grid item xs={12} sm={4} key={pharmacy.id}>
+              <Card style={{ padding: '16px', height: '100%' }}>
+                <CardContent>
+                  <Typography variant="h6" color="primary">
+                    {pharmacy.pharmacy.name}
+                  </Typography>
+                  <Typography variant="body1" color="secondary">
+                    {pharmacy.pharmacy.pincode}
+                  </Typography>
+                  <Typography variant="body1" color="secondary">
+                    {pharmacy.pharmacy.address}
+                  </Typography>
+                  <Typography variant="body1" color="secondary">
+                    📞 {pharmacy.pharmacy.email}
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{ marginTop: '10px', borderRadius: 10, height: 50, width: 170 }}
+                  >
+                    Location
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
-      </Container>
-    </ThemeProvider>
+      );
+    } else if (isError) {
+      const errorMessage = error ? error.message : 'An error occurred.';
+      return <p>Error: {errorMessage}</p>;
+    }
+  
+    return null;
+  };
+
+  return (
+    <>
+      <NavbarComponent />
+      <div className='one'>
+        <div className="medicine">
+          <div className="search-bar">
+            <TextField
+              type="text"
+              placeholder="Pincode"
+              value={pincode}
+              onChange={handlePincodeChange}
+              className="search-input"
+              size="small"
+              name="pincode"
+            />
+            <TextField
+              type="text"
+              placeholder="Medicine"
+              value={medicine}
+              onChange={handleMedicineChange}
+              className="search-input"
+              size="small"
+              name="medicine"
+            />
+          </div>
+        </div>
+      </div>
+
+      <ThemeProvider theme={theme}>
+        <Container maxWidth="lg" style={{ marginTop: 80 }}>
+          <Typography variant="h2" style={{ marginTop: 100, fontSize: 40 }}>
+            Pharmacies
+          </Typography>
+          {renderPharmaciesData()}
+        </Container>
+      </ThemeProvider>
     </>
-    );
+  );
 };
 
 export default MedicinesPage;
