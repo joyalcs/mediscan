@@ -10,6 +10,7 @@ import { useRegisterMedicineMutation } from '../services/medicine/medicineApi';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import {getToken} from '../services/localStorage'
+import NavbarComponent from '../components/Navbar';
 
 const AddMedicinePage = () => {
   const theme = createTheme(); // Define your theme
@@ -77,6 +78,7 @@ const AddMedicinePage = () => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <NavbarComponent/>
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />

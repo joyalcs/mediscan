@@ -6,7 +6,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useGetmedicinesQuery } from '../services/medicine/medicineApi';
 import { getToken } from '../services/localStorage';
-
+import NavbarComponent from '../components/Navbar';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -83,29 +83,7 @@ const Medicines = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="open drawer">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
-            Pharmacy
-          </Typography>
-          {/* <Search>
-            <SearchIcon />
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              value={searchTxt}
-              onChange={handleSearchChange}
-              id="search"
-            />
-          </Search> */}
-          <IconButton edge="end" aria-label="account of current user" color="inherit">
-            <AccountCircle />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <NavbarComponent/>
       <h2 style={{fontSize:40, marginLeft:20}}>Medicines</h2>
       <div style={{ paddingLeft:20 }}>
         {renderMedicineData()}
