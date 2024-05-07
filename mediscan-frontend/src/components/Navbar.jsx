@@ -30,7 +30,7 @@ const NavbarComponent = () => {
             <Link to="/">Home</Link>
             <Link to="/about">About Us</Link>
             <Link to="/services">Our Services</Link>
-            <Link to="/contact">Contact Us</Link>
+            <Link to="/doctors">Doctors</Link>
           </>
         )}
       </div>
