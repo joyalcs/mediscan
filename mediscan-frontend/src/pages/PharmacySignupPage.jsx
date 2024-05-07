@@ -42,6 +42,8 @@ const RegisterPage = () => {
       address: data.get('address'),
       pincode: data.get('pincode'),
       username: data.get('username'),
+      phone: data.get('phone'),
+      location:data.get('location'),
       password: data.get('password'),
       password2: data.get('password2')
     };
@@ -55,7 +57,7 @@ const RegisterPage = () => {
       } else if (res.data) {
         setServerMsg(res.data);
         setErrorMsg(''); // Clear error message on successful submission
-        navigate("/signin");
+        navigate("/login");
       }
     } catch (error) {
       setErrorMsg('An error occurred. Please try again.'); // Set a generic error message
@@ -149,6 +151,26 @@ const RegisterPage = () => {
                         id="username"
                         label="Username"
                         name="username"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="phone"
+                        label="Phone Number"
+                        name="phone"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="location"
+                        label="Copy Your Location URL"
+                        name="location"
                       />
                     </Grid>
                     <Grid item xs={12}>

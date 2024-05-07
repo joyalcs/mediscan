@@ -16,12 +16,15 @@ class Pincode(models.Model):
         str(f"{self.name} - {self.pincode}")
 
 class Pharmacy(models.Model):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(null=True, blank=True)
     pincode = models.CharField(max_length=200, null=True, blank=True)
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=255)
     username = models.CharField(max_length=200, unique=True, null=True, blank=True)
     password = models.CharField(max_length=255)
+    location = models.CharField(max_length=155, blank=True, null=True)
+    phone = models.CharField(max_length=155, null=True, blank=True)
+
 
     def __str__(self):
         return self.name
@@ -35,6 +38,7 @@ class Medicine(models.Model):
     company = models.CharField(max_length=155)
     image =  models.ImageField(null=True, blank=True)
     pharmacy = models.ForeignKey(Pharmacy, on_delete=models.CASCADE, null=True, blank=True)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -47,7 +51,8 @@ class Doctors(models.Model):
     doc_id = models.CharField(max_length=200)
     qualification = models.CharField(max_length=155)
     specialization = models.CharField(max_length=155)
-    image =  models.ImageField()
+    image =  models.ImageField(null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

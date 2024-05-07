@@ -18,8 +18,11 @@ export const medicineApi = createApi({
     }),
     getmedicines: builder.query({
       query: (pharmacy)=> `pharmacy/medicines/?pharmacy=${pharmacy}`
+    }),
+    getDoctors: builder.query({
+      query: (doctors) => 'pharmacy/doctors/'
     })
   })
 })
 
-export const { useRegisterMedicineMutation, useGetmedicinesQuery } = medicineApi
+export const { useRegisterMedicineMutation, useGetmedicinesQuery, useGetDoctorsQuery } = medicineApi

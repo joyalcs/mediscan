@@ -6,6 +6,8 @@ class  PharamcySerializer(serializers.ModelSerializer):
         model = Pharmacy
         fields = "__all__"
 
+    
+
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
         instance.email = validated_data.get("email", instance.email)

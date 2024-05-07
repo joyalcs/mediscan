@@ -136,7 +136,7 @@ const AddMedicinePage = () => {
                     required
                     fullWidth
                     id="quantity"
-                    label="Quantity"
+                    label="Stock"
                     name="quantity"
                   />
                 </Grid>

@@ -6,6 +6,7 @@ import TimeSlotsList from '../components/TimeSlotsList';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import './styles/Doctorsingle.css'
 
 const DoctorsSinglePage = () => {
   return (
@@ -13,10 +14,10 @@ const DoctorsSinglePage = () => {
       <Row>
         {/* Left column with doctor card */}
         <Col md={6}>
-          <Card style={{ maxWidth: 345, height: 260, minWidth: 250 , marginTop:100, marginLeft:100 }}>
+          <Card style={{ maxWidth: 105, height: 260, minWidth: 250 , marginTop:100, marginLeft:100, padding:30 }}>
             <CardMedia
               component="img"
-              height="300"
+              height="250"
               image={Profile}
               alt="Doctor"
             />

@@ -18,8 +18,21 @@ export const pharmacyApi = createApi({
     }),
     getSerachPharmacy: builder.query({
         query: ({medicine, pincode})=> `pharmacy/medicines/?medicine=${medicine}&pincode=${pincode}`
-    })
+    }),
+    sendEmailConfirmation: builder.mutation({
+      query: ({username, doctor}) => {
+        return {
+          url: `pharmacy/confirm/?user=${username}&doctor=${doctor}`,
+          method: 'POST',
+          body: user,
+          headers: {
+            'Content-type': 'application/json'
+          }
+        }
+      }
+    }),
+ 
   })
 })
 
-export const { useRegisterPharmacyMutation, useGetSerachPharmacyQuery } = pharmacyApi 
+export const { useRegisterPharmacyMutation, useGetSerachPharmacyQuery, useSendEmailConfirmationMutation } = pharmacyApi 
